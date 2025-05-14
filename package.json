@@ -1,0 +1,19 @@
+{
+  "name": "mern-practice-sample",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm --prefix apps/frontend run dev\" \"npm --prefix apps/backend run dev\"",
+    "build": "npm --prefix apps/frontend run build",
+    "start": "npm run dev",
+    "start:frontend": "npm --prefix apps/frontend run dev",
+    "start:backend": "npm --prefix apps/backend run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
