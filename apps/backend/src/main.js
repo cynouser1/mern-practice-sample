@@ -1,6 +1,6 @@
 import express from "express";
-import cors from 'cors'
-import {config} from "dotenv";
+import cors from "cors";
+import { config } from "dotenv";
 import userRoutes from "./routes/userRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import connectDB from "./models/db.js";
@@ -9,7 +9,7 @@ const port = process.env.BACKEND_PORT ? Number(process.env.BACKEND_PORT) : 4001;
 const app = express();
 
 // config is using for env variables
-config(); 
+config();
 
 // console.log("process.env.HOST", process.env.HOST);
 // console.log("process.env.BACKEND_PORT", process.env.BACKEND_PORT);
@@ -31,7 +31,7 @@ app.use(express.json());
 app.use("/api", userRoutes);
 app.use("/auth", authRoutes);
 
-// dummy api for jokes 
+// dummy api for jokes
 app.get("/api/jokes", (req, res) => {
   const jokes = [
     {

@@ -1,10 +1,14 @@
 // const express = require('express');
-import express from 'express';
+import express from "express";
 const router = express.Router();
 // const User = require('../models/User');
 // import User from '../models/User.js'
-import {auth} from '../middlewares/authMiddleware.js';
-import { getProfile, resetPassword, updateProfile } from '../controllers/userController.js';
+import { auth } from "../middlewares/authMiddleware.js";
+import {
+  getProfile,
+  resetPassword,
+  updateProfile,
+} from "../controllers/userController.js";
 
 // POST /api/users — Register a user
 // router.post('/users', async (req, res) => {
@@ -51,12 +55,32 @@ import { getProfile, resetPassword, updateProfile } from '../controllers/userCon
 //   res.send({ message: 'Hello API from backend' });
 // });
 
+// dummy products api for checking auth
+router.get("/products", auth, (req, res) => {
+  console.log("req.user", req.user);
+  res.status(200).send({
+    message: "Products fetched successfully",
+    products: [
+      { name: "Product 1", price: 1000 },
+      { name: "Product 2", price: 2000 },
+      { name: "Product 3", price: 3000 },
+      { name: "Product 4", price: 4000 },
+      { name: "Product 5", price: 5000 },
+      { name: "Product 6", price: 6000 },
+      { name: "Product 7", price: 7000 },
+      { name: "Product 8", price: 8000 },
+      { name: "Product 9", price: 9000 },
+      { name: "Product 10", price: 10000 },
+    ],
+  });
 
+  // res.status(200).json({ message: 'Products fetched successfully', products });
+});
 
 // router.get('/get-profile', getProfile);
-router.get('/get-profile', auth, getProfile);
-router.put('/update-profile', auth, updateProfile);
-router.put('/reset-password', auth, resetPassword);
+router.get("/get-profile", auth, getProfile);
+router.put("/update-profile", auth, updateProfile);
+router.put("/reset-password", auth, resetPassword);
 
 // module.exports = router;
-export default router
+export default router;

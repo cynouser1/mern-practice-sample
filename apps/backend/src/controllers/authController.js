@@ -9,20 +9,20 @@ export const signup = async (req, res) => {
   const { name, email, password } = req.body;
   try {
     const userExists = await User.findOne({ email });
-    // if (userExists) return res.status(400).json({ msg: 'User already exists' });
+    // if (userExists) return res.status(400).json({ message: 'User already exists' });
     if (userExists)
       return res
         .status(409)
-        .json({ msg: "User already exists, you can login ", success: false });
+        .json({ message: "User already exists, you can login ", success: false });
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ name, email, password: hashedPassword });
     // const newUser = new User({ name, email, password });
     await newUser.save();
-    res.status(201).json({ msg: "Signup successfully", success: true });
+    res.status(201).json({ message: "Signup successfully", success: true });
   } catch (err) {
     console.error("Signup Error:", err); 
-    res.status(500).json({ msg: "Internal Server error", success: false });
+    res.status(500).json({ message: "Internal Server error", success: false });
   }
 };
 
@@ -32,12 +32,12 @@ export const login = async (req, res) => {
     const user = await User.findOne({ email });
     const errorMsg =
       "Invalid credentials, please check your email and password";
-    // if (!user) return res.status(400).json({ msg: 'Invalid credentials' });
-    if (!user) return res.status(403).json({ msg: errorMsg, success: false });
+    // if (!user) return res.status(400).json({ message: 'Invalid credentials' });
+    if (!user) return res.status(403).json({ message: errorMsg, success: false });
 
     const isPasswordMatch = await bcrypt.compare(password, user.password);
     if (!isPasswordMatch)
-      return res.status(403).json({ msg: errorMsg, success: false });
+      return res.status(403).json({ message: errorMsg, success: false });
 
     console.log("user", user);
     console.log("JWT_SECRET", JWT_SECRET);
@@ -52,6 +52,6 @@ export const login = async (req, res) => {
       .json({ message: "Login Successfully", token, user, success: true });
   } catch (err) {
     console.error("Login Error:", err); 
-    res.status(500).json({ msg: "Server error", success: false });
+    res.status(500).json({ message: "Server error", success: false });
   }
 };
