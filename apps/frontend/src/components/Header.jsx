@@ -45,7 +45,7 @@ const Header = () => {
 
   const menuItems = [
     { name: "Home", href: "/" },
-    { name: "About", href: "#" },
+    { name: "About", href: "/about" },
     { name: "Login", href: "/auth/login" },
     // { name: "Signup", href: "/auth/signup" },
   ];
@@ -64,7 +64,17 @@ const Header = () => {
     { name: "Logout", href: "#", icon: <CiLogout className="w-6 h-6" /> },
   ];
 
-  const { setUser, setToken, token } = useContext(AppContext);
+  const { setUser, setToken } = useContext(AppContext);
+  const token = localStorage.getItem("token");
+
+  const logout = () => {
+    console.log("Logout clicked");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser(null);
+    setToken(null);
+    navigate("/auth/login");
+  };
 
   return (
     <header className="bg-sky-100 border-b border-sky-200 py-2 shadow-md sticky top-0 z-10">
@@ -90,7 +100,9 @@ const Header = () => {
                 href={item.href}
                 // className="text-gray-700 hover:text-blue-600 transition duration-300"
                 // className="text-blue-500 hover:text-blue-700 transition-colors duration-300 font-medium"
-                className={`${token && item.name === "Login"? "hidden": '' } text-blue-500 hover:border-b-2 ease-in hover:border-b-indigo-600 transition-colors duration-300 font-medium`}
+                className={`${
+                  token && item.name === "Login" ? "hidden" : ""
+                } text-blue-500 hover:border-b-2 ease-in hover:border-b-indigo-600 transition-colors duration-300 font-medium`}
               >
                 {item.name}
               </a>
@@ -130,14 +142,7 @@ const Header = () => {
                         onClick={() => {
                           navigate(item.href);
                           if (item.name === "Logout") {
-                            // Handle logout logic here
-                            console.log("Logout clicked");
-                            localStorage.removeItem("token");
-                            // localStorage.removeItem("user");
-                            setUser(null);
-                            setToken(null);
-                            // Redirect to login page or perform any other action
-                            navigate("/auth/login");
+                            logout();
                           }
                         }}
                         className="flex gap-3 items-center px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer text-md"

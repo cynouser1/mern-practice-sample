@@ -35,11 +35,12 @@ export default function Login() {
     if (res.success) {
       toast.success(res.message);
       setFormData({ email: "", password: "" });
-      setTimeout(() => navigate("/"), 2000);
+      // setTimeout(() => navigate("/"), 2000);
+      navigate("/");
       localStorage.setItem("token", res.token);
       let user = res.user;
       delete user.password;
-      // localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("user", JSON.stringify(user));
     } else {
       toast.error(res.message);
     }
@@ -70,7 +71,7 @@ export default function Login() {
                         type="text"
                         placeholder="info@gmail.com"
                         name="email"
-                        // value={formData.email}
+                        value={formData.email}
                         onChange={handleChange}
                         className="h-11 w-full overflow-hidden rounded-lg border px-4 py-2.5 border-gray-300 bg-transparent text-sm text-gray-500 transition-colors placeholder:text-gray-400 focus:outline focus:outline-sky-500 focus:shadow-md"
                       />
@@ -85,7 +86,7 @@ export default function Login() {
                         type={showPassword ? "text" : "password"}
                         placeholder="Enter your password"
                         name="password"
-                        // value={formData.password}
+                        value={formData.password}
                         onChange={handleChange}
                         className="h-11 w-full overflow-hidden rounded-lg border px-4 py-2.5 border-gray-300 bg-transparent text-sm text-gray-500 transition-colors placeholder:text-gray-400 focus:outline focus:outline-sky-500 focus:shadow-md"
                       />

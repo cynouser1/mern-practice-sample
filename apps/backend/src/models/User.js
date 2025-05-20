@@ -15,19 +15,14 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true, trim: true },
     password: { type: String, required: true },
     phone: { type: String },
-    bio: { type: String },
+    designation: { type: String },
     address: {
       street: { type: String },
       landmark: { type: String },
       city: { type: String },
       state: { type: String },
       pincode: { type: String },
-    },
-    socialLinks: {
-      facebook: { type: String },
-      twitter: { type: String },
-      linkedin: { type: String },
-      github: { type: String },
+      country: { type: String },
     },
     googleId: {type: String}
   },

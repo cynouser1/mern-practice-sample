@@ -46,8 +46,10 @@ export const login = async (credentials) => {
 
 // Get Profile
 export const getProfile = async () => {
+  console.log("getProfile token", getToken);
+  console.log("getProfile url", `${API_BASE_URL}/api/get-profile`);
   try {
-    const res = await fetch(`${API_BASE_URL}/auth/profile`, {
+    const res = await fetch(`${API_BASE_URL}/api/get-profile`, {
       method: "GET",
       headers: headers(),
     });
@@ -61,7 +63,7 @@ export const getProfile = async () => {
 // Update Profile
 export const updateProfile = async (updates) => {
   try {
-    const res = await fetch(`${API_BASE_URL}/auth/profile`, {
+    const res = await fetch(`${API_BASE_URL}/api/update-profile`, {
       method: "PUT",
       headers: headers(),
       body: JSON.stringify(updates),
@@ -76,7 +78,7 @@ export const updateProfile = async (updates) => {
 // Reset Password
 export const resetPassword = async (passwordData) => {
   try {
-    const res = await fetch(`${API_BASE_URL}/auth/reset-password`, {
+    const res = await fetch(`${API_BASE_URL}/api/reset-password`, {
       method: "PUT",
       headers: headers(),
       body: JSON.stringify(passwordData),

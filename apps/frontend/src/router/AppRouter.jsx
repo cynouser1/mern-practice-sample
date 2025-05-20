@@ -7,6 +7,7 @@ import SignUp from "../pages/auth/SignUp";
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
 import NotFound from "../pages/NotFound";
+import About from "../pages/About";
 
 const AppRouter = () => {
   return (
@@ -14,6 +15,7 @@ const AppRouter = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/signup" element={<SignUp />} />
         <Route path="/profile" element={<Profile />} />
