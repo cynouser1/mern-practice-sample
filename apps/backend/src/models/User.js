@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     phone: { type: String },
     designation: { type: String },
+    googleId: { type: String },
     address: {
       street: { type: String },
       landmark: { type: String },
@@ -24,7 +25,6 @@ const userSchema = new mongoose.Schema(
       pincode: { type: String },
       country: { type: String },
     },
-    googleId: {type: String}
   },
   { timestamps: true }
 );

@@ -56,11 +56,11 @@ const Header = () => {
       href: "/profile",
       icon: <RxAvatar className="w-6 h-6" />,
     },
-    {
-      name: "Settings",
-      href: "#",
-      icon: <IoSettingsOutline className="w-6 h-6" />,
-    },
+    // {
+    //   name: "Settings",
+    //   href: "#",
+    //   icon: <IoSettingsOutline className="w-6 h-6" />,
+    // },
     { name: "Logout", href: "#", icon: <CiLogout className="w-6 h-6" /> },
   ];
 
@@ -95,17 +95,19 @@ const Header = () => {
           {/* Desktop Menu */}
           <nav className="hidden md:flex items-center space-x-8">
             {menuItems.map((item) => (
-              <a
+              <div
                 key={item.name}
-                href={item.href}
+                onClick={() => {
+                  navigate(item.href);
+                }}
                 // className="text-gray-700 hover:text-blue-600 transition duration-300"
                 // className="text-blue-500 hover:text-blue-700 transition-colors duration-300 font-medium"
                 className={`${
                   token && item.name === "Login" ? "hidden" : ""
-                } text-blue-500 hover:border-b-2 ease-in hover:border-b-indigo-600 transition-colors duration-300 font-medium`}
+                } cursor-pointer text-blue-500 hover:border-b-2 ease-in hover:border-b-indigo-600 transition-colors duration-300 font-medium`}
               >
                 {item.name}
-              </a>
+              </div>
             ))}
 
             {/* Profile Dropdown */}
@@ -145,7 +147,7 @@ const Header = () => {
                             logout();
                           }
                         }}
-                        className="flex gap-3 items-center px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer text-md"
+                        className="cursor-pointer flex gap-3 items-center px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 text-md"
                       >
                         {item.icon} {item.name}
                       </div>
@@ -158,9 +160,6 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
-            {/* <button onClick={toggleProfile} className="mr-4 focus:outline-none">
-              <FaUserCircle className="w-6 h-6 text-gray-600" />
-            </button> */}
             <button
               onClick={toggleMenu}
               className="text-gray-700 focus:outline-none"
@@ -179,20 +178,24 @@ const Header = () => {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4 text-left" ref={menuRef}>
-            <div className="flex flex-col space-y-3 ">
+            <div className="flex flex-col space-y-1 ">
               {menuItems.map((item) => (
-                <a
+                <div
                   key={item.name}
-                  href={item.href}
-                  className="block px-3 py-2 text-gray-700 rounded hover:bg-blue-50 hover:text-blue-600"
+                  onClick={() => {
+                    navigate(item.href);
+                  }}
+                  className={`${
+                    token && item.name === "Login" ? "hidden" : ""
+                  } cursor-pointer block px-3 py-2 text-gray-700 rounded hover:bg-blue-50 hover:text-blue-600`}
                 >
                   {item.name}
-                </a>
+                </div>
               ))}
             </div>
 
             {/* Mobile Profile Dropdown */}
-            <div className="mt-4 pt-4 border-t border-gray-200">
+            {/* <div className="mt-4 pt-4 border-t border-gray-200">
               {profileItems.map((item) => (
                 <a
                   key={item.name}
@@ -201,6 +204,22 @@ const Header = () => {
                 >
                   {item.name}
                 </a>
+              ))}
+            </div> */}
+            <div className=" pt-4 border-t border-gray-200">
+              {profileItems.map((item) => (
+                <div
+                  key={item.name}
+                  onClick={() => {
+                    navigate(item.href);
+                    if (item.name === "Logout") {
+                      logout();
+                    }
+                  }}
+                  className="cursor-pointer block px-3 py-2 text-gray-700 rounded hover:bg-blue-50 hover:text-blue-600"
+                >
+                  {item.name}
+                </div>
               ))}
             </div>
           </div>
